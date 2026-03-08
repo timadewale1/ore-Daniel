@@ -5,14 +5,22 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ─────────────────────────────────────────
-     1. PRELOADER
+     1. PRELOADER + BACKGROUND AUDIO
   ───────────────────────────────────────── */
   const preloader = document.getElementById('preloader');
+  const bgAudio   = document.getElementById('bgAudio');
+
   window.addEventListener('load', () => {
     setTimeout(() => {
       preloader.classList.add('hidden');
       document.body.style.overflow = '';
       triggerHeroReveal();
+      // attempt to start background music once preloader finishes
+      if (bgAudio) {
+        bgAudio.play().catch(() => {
+          // autoplay may be blocked; user interaction will unpause later
+        });
+      }
     }, 1800);
   });
   document.body.style.overflow = 'hidden';
@@ -199,6 +207,19 @@ document.addEventListener('DOMContentLoaded', () => {
   video.addEventListener('ended',    () => playBtn.classList.remove('hidden'));
   video.addEventListener('pause',    () => playBtn.classList.remove('hidden'));
   video.addEventListener('play',     () => playBtn.classList.add('hidden'));
+
+  // sync background audio with video playback
+  if (bgAudio) {
+    video.addEventListener('play', () => bgAudio.pause());
+    video.addEventListener('pause', () => {
+      // resume music only if user didn't explicitly pause it
+      if (bgAudio.paused && !video.paused) return;
+      bgAudio.play().catch(() => {});
+    });
+    video.addEventListener('ended', () => {
+      bgAudio.play().catch(() => {});
+    });
+  }
 
 
   /* ─────────────────────────────────────────
