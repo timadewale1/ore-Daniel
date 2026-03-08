@@ -43,6 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('open');
     navLinks.classList.toggle('open');
+    // ensure navbar also gets a background when menu is revealed
+    navbar.classList.toggle('menu-open');
   });
 
   // Close mobile menu on link click

@@ -12,7 +12,8 @@
   --olive-pale:   #eef0e2;
   --cream:        #f5f0e8;
   --cream-dark:   #e8e0cc;
-  --gold:         #c8a96e;
+  --gold:         #d9b44a;
+  --white:        #fff;
   --gold-light:   #e0c898;
   --ink:          #2a2a1e;
   --ink-muted:    #5a5a48;
@@ -154,7 +155,31 @@ a { text-decoration: none; color: inherit; }
   gap: 2.5rem;
   z-index: 99;
 }
-.nav-links.open a { font-size: 1.2rem; color: var(--cream); }
+.nav-links.open a {
+  font-size: 1.2rem;
+  color: var(--cream);
+  /* give each link a visible block behind it */
+  display: block;
+  padding: 0.6rem 1.2rem;
+  background: rgba(74,84,41,0.5);
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+.nav-links.open a:hover {
+  background: rgba(74,84,41,0.7);
+}
+
+/* keep navbar backed when menu is open (any screen size) */
+#navbar.menu-open {
+  background: rgba(74,84,41,0.97);
+}
+
+/* ensure navbar has a background on narrower screens for visibility */
+@media (max-width: 768px) {
+  #navbar {
+    background: rgba(74,84,41,0.97);
+  }
+}
 
 /* ─── HERO ─── */
 #hero {
@@ -523,7 +548,10 @@ a { text-decoration: none; color: inherit; }
 }
 .video-container {
   position: relative;
-  max-width: 860px;
+  /* constrain size for portrait footage */
+  max-width: 700px;
+  max-height: 700px;
+  width: 90vw;
   margin: 0 auto;
   cursor: pointer;
 }
@@ -679,6 +707,7 @@ a { text-decoration: none; color: inherit; }
 .swatch--olive  { background: var(--olive); }
 .swatch--cream  { background: var(--cream-dark); }
 .swatch--gold   { background: var(--gold); }
+.swatch--white   { background: var(--white); }
 .dress-code p { font-style: italic; color: var(--ink-muted); font-size: 0.98rem; }
 
 /* ─── RSVP ─── */
