@@ -257,16 +257,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const rsvpSuccess = document.getElementById('rsvpSuccess');
 
   if (rsvpSubmit && rsvpForm && rsvpSuccess) {
-    rsvpSubmit.addEventListener('click', () => {
+    rsvpSubmit.addEventListener('click', async (e) => {
+      e.preventDefault();
+      
       const nameEl = document.getElementById('fname');
       const emailEl = document.getElementById('femail');
       const attendEl = document.getElementById('fattend');
+      const guestsEl = document.getElementById('fguests');
+      const messageEl = document.getElementById('fmessage');
 
       if (!nameEl || !emailEl || !attendEl) return;
 
       const name = nameEl.value.trim();
       const email = emailEl.value.trim();
       const attend = attendEl.value;
+      const guests = guestsEl ? guestsEl.value : '1';
+      const message = messageEl ? messageEl.value.trim() : '';
 
       if (!name) {
         shake(nameEl);
@@ -286,10 +292,39 @@ document.addEventListener('DOMContentLoaded', () => {
       rsvpSubmit.textContent = 'Sending…';
       rsvpSubmit.disabled = true;
 
-      setTimeout(() => {
-        rsvpForm.classList.add('hidden');
-        rsvpSuccess.classList.remove('hidden');
-      }, 1200);
+      try {
+        const response = await fetch('/api/rsvp', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            fname: name,
+            femail: email,
+            fattend: attend,
+            fguests: guests,
+            fmessage: message,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          rsvpForm.classList.add('hidden');
+          rsvpSuccess.classList.remove('hidden');
+        } else {
+          shake(rsvpSubmit);
+          alert(data.error || 'Failed to submit RSVP. Please try again.');
+          rsvpSubmit.textContent = 'Send RSVP';
+          rsvpSubmit.disabled = false;
+        }
+      } catch (error) {
+        console.error('RSVP submission error:', error);
+        shake(rsvpSubmit);
+        alert('Network error. Please check your connection and try again.');
+        rsvpSubmit.textContent = 'Send RSVP';
+        rsvpSubmit.disabled = false;
+      }
     });
   }
 
