@@ -1,0 +1,11 @@
+{
+  "buildCommand": "npm install",
+  "devCommand": "npm run dev",
+  "outputDirectory": ".",
+  "framework": "vanilla",
+  "env": {
+    "EMAIL_SERVICE": "@email_service",
+    "EMAIL_USER": "@email_user",
+    "EMAIL_PASSWORD": "@email_password"
+  }
+}
