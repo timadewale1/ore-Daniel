@@ -1,6 +1,5 @@
 const nodemailer = require('nodemailer');
 
-// Email templates
 const guestInvitationTemplate = (guestName, guestEmail, attending, guestCount, message) => {
   const attendanceStatus = attending === 'yes' 
     ? '✓ You\'re attending – we can\'t wait to celebrate with you!'
@@ -246,10 +245,10 @@ const adminNotificationTemplate = (guestName, guestEmail, attending, guestCount,
 };
 
 module.exports = async (req, res) => {
-  // Enable CORS
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -262,60 +261,43 @@ module.exports = async (req, res) => {
   try {
     const { fname, femail, fattend, fguests, fmessage } = req.body;
 
-    // Validation
     if (!fname || !femail || !fattend) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Verify environment variables
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
-      console.error('Email credentials missing');
-      return res.status(500).json({ 
-        error: 'Email service not configured. Please contact the administrator.' 
-      });
+      console.error('Email config missing');
+      return res.status(500).json({ error: 'Email not configured' });
     }
 
     const guestCount = parseInt(fguests) || 1;
-    const messageText = fmessage ? fmessage.trim() : '';
+    const messageText = fmessage ? String(fmessage).trim() : '';
 
-    // Configure transporter
     const transporter = nodemailer.createTransport({
-      service: process.env.EMAIL_SERVICE || 'gmail',
+      service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD,
       },
     });
 
-    // Send email to guest
-    const guestMailOptions = {
+    await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: femail,
-      subject: `RSVP Confirmation – Oreoluwa & Daniel's Wedding`,
+      subject: 'Oreoluwa & Daniel - RSVP Confirmation',
       html: guestInvitationTemplate(fname, femail, fattend, guestCount, messageText),
-    };
+    });
 
-    await transporter.sendMail(guestMailOptions);
-
-    // Send admin notification
-    const adminMailOptions = {
+    await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: 'timadewale1@gmail.com',
-      subject: `New RSVP: ${fname}`,
+      subject: `RSVP: ${fname}`,
       html: adminNotificationTemplate(fname, femail, fattend, guestCount, messageText),
-    };
-
-    await transporter.sendMail(adminMailOptions);
-
-    res.status(200).json({ 
-      success: true, 
-      message: 'RSVP submitted successfully. Check your email for confirmation!' 
     });
+
+    return res.status(200).json({ success: true, message: 'RSVP submitted!' });
   } catch (error) {
-    console.error('RSVP error:', error);
-    res.status(500).json({ 
-      error: 'Failed to process RSVP. Please try again later.',
-      details: error.message 
-    });
+    console.error('Error:', error);
+    return res.status(500).json({ error: error.message });
   }
 };
