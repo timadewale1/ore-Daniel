@@ -137,7 +137,7 @@ const guestInvitationTemplate = (guestName, guestEmail, attending, guestCount, m
     <body>
       <div class="container">
         <div class="header">
-          <div class="monogram">D <span>&</span> O</div>
+          <div class="monogram">O <span>&</span> D</div>
           <div class="divider"></div>
           <div class="subtitle">Oreoluwa & Daniel • May 30, 2026</div>
         </div>
@@ -183,7 +183,7 @@ const guestInvitationTemplate = (guestName, guestEmail, attending, guestCount, m
 
         <div class="footer">
           <div class="footer-text">With love & gratitude</div>
-          <div class="footer-verse">"Where you go I will go, and where you stay I will stay." — Ruth 1:16</div>
+          <div class="footer-verse">"Where you go I will go, and where you stay I will stay." - Ruth 1:16</div>
         </div>
       </div>
     </body>

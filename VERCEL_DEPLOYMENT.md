@@ -64,7 +64,7 @@ The `api/rsvp.js` file runs as a **serverless function**. When someone submits t
 4. Guest gets styled confirmation email
 5. Admin gets notification at timadewale1@gmail.com
 
-**It's exactly the same as local — no changes needed!**
+**It's exactly the same as local - no changes needed!**
 
 ## Testing Locally Before Deployment
 
@@ -136,7 +136,7 @@ const transporter = nodemailer.createTransport({
 ## Local Development Tips
 
 - **Test emails locally first** before deploying
-- **Keep `.env` file private** — add to `.gitignore`
+- **Keep `.env` file private** - add to `.gitignore`
 - **Check Vercel logs** if issues arise: `vercel logs`
 
 ## Git Setup (If Needed)

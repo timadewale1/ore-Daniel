@@ -1,5 +1,5 @@
 /* =========================================================
-   ORE & DANIEL WEDDING — script.js
+   ORE & DANIEL WEDDING - script.js
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ─────────────────────────────────────────
-     3. NAVBAR — scroll behaviour + hamburger
+     3. NAVBAR - scroll behaviour + hamburger
   ───────────────────────────────────────── */
   const navbar = document.getElementById('navbar');
   const hamburger = document.getElementById('hamburger');
@@ -376,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ─────────────────────────────────────────
-     10. PARALLAX — hero leaves subtle float
+     10. PARALLAX - hero leaves subtle float
   ───────────────────────────────────────── */
   const heroLeaves = document.querySelectorAll('.hero-leaves');
 
