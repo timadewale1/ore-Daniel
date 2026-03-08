@@ -7,23 +7,32 @@ document.addEventListener('DOMContentLoaded', () => {
      1. PRELOADER + BACKGROUND AUDIO
   ───────────────────────────────────────── */
   const preloader = document.getElementById('preloader');
-  const bgAudio = document.getElementById('bgAudio');
+  const preloader = document.getElementById('preloader');
+const bgAudio = document.getElementById('bgAudio');
 
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      if (preloader) preloader.classList.add('hidden');
-      document.body.style.overflow = '';
-      triggerHeroReveal();
+function startAudioOnce() {
+  if (!bgAudio) return;
+  bgAudio.play().catch(() => {});
+  document.removeEventListener('click', startAudioOnce);
+  document.removeEventListener('touchstart', startAudioOnce);
+  document.removeEventListener('keydown', startAudioOnce);
+}
 
-      if (bgAudio) {
-        bgAudio.play().catch(() => {
-          // autoplay may be blocked
-        });
-      }
-    }, 1800);
-  });
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    if (preloader) preloader.classList.add('hidden');
+    document.body.style.overflow = '';
+    triggerHeroReveal();
 
-  document.body.style.overflow = 'hidden';
+    if (bgAudio) {
+      bgAudio.play().catch(() => {});
+    }
+  }, 1800);
+});
+
+document.addEventListener('click', startAudioOnce);
+document.addEventListener('touchstart', startAudioOnce, { passive: true });
+document.addEventListener('keydown', startAudioOnce);
 
   /* ─────────────────────────────────────────
      2. HERO STAGGERED REVEAL
