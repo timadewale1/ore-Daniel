@@ -3,31 +3,38 @@
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
-  /* ─────────────────────────────────────────
+  /* ---------------------------------------------------------
      1. PRELOADER + BACKGROUND AUDIO
-  ───────────────────────────────────────── */
+  --------------------------------------------------------- */
   const preloader = document.getElementById('preloader');
   const bgAudio = document.getElementById('bgAudio');
+
+  const attemptAudioPlayback = () => {
+    if (!bgAudio) return;
+    bgAudio.loop = true;
+    bgAudio.play().catch(() => {
+      // Browsers can still block autoplay; we try again on user interaction.
+    });
+  };
+
+  attemptAudioPlayback();
+  document.addEventListener('pointerdown', attemptAudioPlayback, { once: true });
+  document.addEventListener('keydown', attemptAudioPlayback, { once: true });
 
   window.addEventListener('load', () => {
     setTimeout(() => {
       if (preloader) preloader.classList.add('hidden');
       document.body.style.overflow = '';
       triggerHeroReveal();
-
-      if (bgAudio) {
-        bgAudio.play().catch(() => {
-          // autoplay may be blocked
-        });
-      }
+      attemptAudioPlayback();
     }, 1800);
   });
 
   document.body.style.overflow = 'hidden';
 
-  /* ─────────────────────────────────────────
+  /* ---------------------------------------------------------
      2. HERO STAGGERED REVEAL
-  ───────────────────────────────────────── */
+  --------------------------------------------------------- */
   function triggerHeroReveal() {
     const heroItems = document.querySelectorAll('#hero .reveal');
     heroItems.forEach((el, i) => {
@@ -35,12 +42,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ─────────────────────────────────────────
+  /* ---------------------------------------------------------
      3. NAVBAR - scroll behaviour + hamburger
-  ───────────────────────────────────────── */
+  --------------------------------------------------------- */
   const navbar = document.getElementById('navbar');
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.querySelector('.nav-links');
+
+  const setMenuState = (isOpen) => {
+    if (!hamburger || !navLinks || !navbar) return;
+    hamburger.classList.toggle('open', isOpen);
+    navLinks.classList.toggle('open', isOpen);
+    navbar.classList.toggle('menu-open', isOpen);
+    document.body.classList.toggle('menu-open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    if (isOpen) {
+      attemptAudioPlayback();
+    }
+  };
 
   window.addEventListener(
     'scroll',
@@ -54,30 +74,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (hamburger && navLinks && navbar) {
     hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      navLinks.classList.toggle('open');
-      navbar.classList.toggle('menu-open');
+      setMenuState(!navLinks.classList.contains('open'));
     });
 
     navLinks.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        navLinks.classList.remove('open');
-        navbar.classList.remove('menu-open');
-      });
+      a.addEventListener('click', () => setMenuState(false));
     });
   }
 
-  /* ─────────────────────────────────────────
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navLinks && navLinks.classList.contains('open')) {
+      setMenuState(false);
+    }
+  });
+
+  /* ---------------------------------------------------------
      4. SCROLL REVEAL (IntersectionObserver)
-  ───────────────────────────────────────── */
+  --------------------------------------------------------- */
   const revealEls = document.querySelectorAll('.reveal:not(#hero .reveal)');
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        const delay = parseInt(entry.target.dataset.delay) || 0;
+        const delay = parseInt(entry.target.dataset.delay, 10) || 0;
         setTimeout(() => entry.target.classList.add('visible'), delay);
         observer.unobserve(entry.target);
       });
@@ -87,10 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   revealEls.forEach((el) => observer.observe(el));
 
-  /* ─────────────────────────────────────────
+  /* ---------------------------------------------------------
      5. COUNTDOWN TIMER
-  ───────────────────────────────────────── */
-  const weddingDate = new Date('2026-05-30T00:00:00');
+  --------------------------------------------------------- */
+  const weddingDate = new Date('2026-06-26T09:00:00');
 
   function updateCountdown() {
     const daysEl = document.getElementById('cd-days');
@@ -127,9 +147,103 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  /* ─────────────────────────────────────────
-     6. GALLERY LIGHTBOX
-  ───────────────────────────────────────── */
+  /* ---------------------------------------------------------
+     6. STORY MODAL
+  --------------------------------------------------------- */
+  const storyData = {
+    'how-we-met': {
+      title: 'How We Met',
+      date: '2017',
+      body: [
+        `Our story began back in 2017 at the GSF campus fellowship at FUTA. DM first noticed Oreoluwa as the beautiful but seemingly stubborn younger sister of a choir member. Convinced she needed guidance, he made it his personal mission to take her under his wing and "mentor" her.`,
+        `Meanwhile, Oreoluwa's first impression was completely different: she simply saw an energetic, over-zealous guy jumping around during family songs. When DM was later appointed as her Assistant Ushering Coordinator, Oreoluwa was less than thrilled. In fact, her ultimate master plan was born: she would stay in the unit, but only to frustrate him until he left!`
+      ]
+    },
+    'the-courtship': {
+      title: 'The Courtship',
+      date: '1st March 2024',
+      body: [
+        `Despite her tough exterior, DM's persistent kindness slowly began to melt the ice. He constantly defended her in the unit, patiently checked in on her chemistry grades, and interestingly dashed her his BDG lab coat and helmet for practicals, even though he secretly still needed it himself.`,
+        `The true turning point for Oreoluwa came when DM brilliantly answered a complex theological question about relationships that Oreoluwa had been asking pastors for years. Suddenly, the "annoying guy" became a deeply respected friend, and our bond blossomed over periodic Bible studies.`,
+        `The ultimate shift happened during exam season. Remembering a passing comment DM had made years prior, Oreoluwa skipped her own exam prep just to buy him a bag of study chocolates. For DM, opening that bag of chocolates was the exact moment he silently vowed to himself, "I am going to marry this girl." This conviction was sealed at his final year dinner.`,
+        `After a last-minute change of plans, he asked Oreoluwa to be his date. Seeing her look absolutely breathtaking and seamlessly answering questions about him in front of everyone, he knew without a doubt that she was the one.`
+      ]
+    },
+    'the-proposal': {
+      title: 'The Proposal',
+      date: '1st March 2026',
+      body: [
+        `While DM first declared his intentions in 2023, we officially began our courtship on the 1st of March 2024, despite Oreoluwa's initial fears that adding romance might ruin our incredible friendship.`,
+        `Fast forward to exactly two years later: March 1, 2026. Knowing Oreoluwa was notoriously inquisitive and claimed she could never be surprised, DM orchestrated an absolute masterclass in misdirection. He dropped obvious hints about a proposal date, booked her a nail appointment, and then intentionally "cancelled" our evening date to completely throw her off the scent.`,
+        `Meanwhile, he worked with the OneChurch International protocol team to set up a fake official assignment for her with the Pastor's wife. When Oreoluwa arrived at the venue straight from church, expecting a routine work duty, she walked right into DM waiting to officially ask her to be his wife. For the first time, she was genuinely speechless. Teary-eyed, she joyfully said "yes" in front of everyone.`
+      ]
+    },
+    'forever-after': {
+      title: 'Forever After',
+      date: '26th June 2026',
+      body: [
+        `Today, the dynamic that brought us together is stronger than ever. We are still enjoying our deep, daily Bible studies, continuously learning from one another, and purposefully growing in love.`,
+        `The girl who once plotted to frustrate him in the ushering unit is now completely obsessed, and the guy who just wanted to "mentor" her found his lifetime partner. As we look toward our big day on June 26th, we couldn't be more excited to spend the rest of our lives building a beautiful, God-centered marriage.`
+      ]
+    }
+  };
+
+  const storyModal = document.getElementById('storyModal');
+  const storyModalTitle = document.getElementById('storyModalTitle');
+  const storyModalDate = document.getElementById('storyModalDate');
+  const storyModalBody = document.getElementById('storyModalBody');
+  const storyButtons = document.querySelectorAll('[data-story-target]');
+  const storyCloseButtons = document.querySelectorAll('[data-story-close]');
+
+  const renderStory = (id) => {
+    const story = storyData[id];
+    if (!story || !storyModal || !storyModalTitle || !storyModalDate || !storyModalBody) return;
+
+    storyModalTitle.textContent = story.title;
+    storyModalDate.textContent = story.date;
+    storyModalBody.innerHTML = story.body.map((paragraph) => `<p>${paragraph}</p>`).join('');
+  };
+
+  const openStoryModal = (id) => {
+    renderStory(id);
+    if (!storyModal) return;
+    storyModal.classList.add('open');
+    storyModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeStoryModal = () => {
+    if (!storyModal) return;
+    storyModal.classList.remove('open');
+    storyModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  storyButtons.forEach((button) => {
+    button.addEventListener('click', () => openStoryModal(button.dataset.storyTarget));
+  });
+
+  storyCloseButtons.forEach((button) => {
+    button.addEventListener('click', closeStoryModal);
+  });
+
+  if (storyModal) {
+    storyModal.addEventListener('click', (e) => {
+      if (e.target === storyModal || e.target.hasAttribute('data-story-close')) {
+        closeStoryModal();
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && storyModal && storyModal.classList.contains('open')) {
+      closeStoryModal();
+    }
+  });
+
+  /* ---------------------------------------------------------
+     7. GALLERY LIGHTBOX
+  --------------------------------------------------------- */
   const galleryItems = document.querySelectorAll('.gallery-item');
   const lightbox = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
@@ -215,9 +329,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ─────────────────────────────────────────
-     7. VIDEO PLAYER CUSTOM CONTROL
-  ───────────────────────────────────────── */
+  /* ---------------------------------------------------------
+     8. VIDEO PLAYER CUSTOM CONTROL
+  --------------------------------------------------------- */
   const video = document.getElementById('weddingVideo');
   const playBtn = document.getElementById('videoPlayBtn');
 
@@ -241,17 +355,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (bgAudio) {
       video.addEventListener('play', () => bgAudio.pause());
       video.addEventListener('pause', () => {
-        bgAudio.play().catch(() => {});
+        attemptAudioPlayback();
       });
       video.addEventListener('ended', () => {
-        bgAudio.play().catch(() => {});
+        attemptAudioPlayback();
       });
     }
   }
 
-  /* ─────────────────────────────────────────
-     8. RSVP FORM
-  ───────────────────────────────────────── */
+  /* ---------------------------------------------------------
+     9. RSVP FORM
+  --------------------------------------------------------- */
   const rsvpSubmit = document.getElementById('rsvpSubmit');
   const rsvpForm = document.getElementById('rsvpForm');
   const rsvpSuccess = document.getElementById('rsvpSuccess');
@@ -259,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (rsvpSubmit && rsvpForm && rsvpSuccess) {
     rsvpSubmit.addEventListener('click', async (e) => {
       e.preventDefault();
-      
+
       const nameEl = document.getElementById('fname');
       const emailEl = document.getElementById('femail');
       const attendEl = document.getElementById('fattend');
@@ -289,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      rsvpSubmit.textContent = 'Sending…';
+      rsvpSubmit.textContent = 'Sending...';
       rsvpSubmit.disabled = true;
 
       try {
@@ -349,9 +463,9 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
-  /* ─────────────────────────────────────────
-     9. SMOOTH ACTIVE NAV LINK HIGHLIGHT
-  ───────────────────────────────────────── */
+  /* ---------------------------------------------------------
+     10. SMOOTH ACTIVE NAV LINK HIGHLIGHT
+  --------------------------------------------------------- */
   const sections = document.querySelectorAll('section[id]');
   const navAs = document.querySelectorAll('.nav-links a');
 
@@ -375,9 +489,9 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach((sec) => sectionObserver.observe(sec));
   }
 
-  /* ─────────────────────────────────────────
-     10. PARALLAX - hero leaves subtle float
-  ───────────────────────────────────────── */
+  /* ---------------------------------------------------------
+     11. PARALLAX - hero leaves subtle float
+  --------------------------------------------------------- */
   const heroLeaves = document.querySelectorAll('.hero-leaves');
 
   window.addEventListener(
@@ -392,4 +506,3 @@ document.addEventListener('DOMContentLoaded', () => {
     { passive: true }
   );
 });
- 

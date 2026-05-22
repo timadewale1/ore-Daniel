@@ -3,34 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Oreoluwa & Daniel - Forever Begins</title>
+  <title>Oreoluwa & Daniel-Matt - Forever Begins</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;500&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
-  <!-- ─── PRELOADER ─── -->
+  <!-- PRELOADER -->
   <div id="preloader">
     <div class="pre-monogram">O <span>&</span> D</div>
     <div class="pre-line"></div>
   </div>
 
-  <!-- ─── NAVIGATION ─── -->
+  <!-- GLOBAL DECOR -->
+  <div class="global-floaters" aria-hidden="true">
+    <span class="fl f1"></span>
+    <span class="fl f2"></span>
+    <span class="fl f3"></span>
+    <span class="fl f4"></span>
+    <span class="fl f5"></span>
+    <span class="fl f6"></span>
+    <span class="fl f7"></span>
+    <span class="fl f8"></span>
+    <span class="fl f9"></span>
+    <span class="fl f10"></span>
+    <span class="fl f11"></span>
+    <span class="fl f12"></span>
+  </div>
+
+  <!-- NAVIGATION -->
   <nav id="navbar">
     <div class="nav-monogram">O & D</div>
     <ul class="nav-links">
       <li><a href="#story">Our Story</a></li>
+      <li><a href="#families">Families</a></li>
       <li><a href="#gallery">Gallery</a></li>
       <li><a href="#video">Film</a></li>
       <li><a href="#details">Details</a></li>
-      <!-- <li><a href="#rsvp">RSVP</a></li> -->
     </ul>
-    <!-- <button class="hamburger" id="hamburger" aria-label="menu">
+    <button class="hamburger" id="hamburger" aria-label="menu" aria-expanded="false">
       <span></span><span></span><span></span>
-    </button> -->
+    </button>
   </nav>
 
-  <!-- ─── HERO ─── -->
+  <!-- HERO -->
   <section id="hero">
     <div class="hero-bg-overlay"></div>
     <div class="hero-leaves hero-leaves--left">
@@ -54,6 +70,10 @@
       </svg>
     </div>
 
+    <div class="floating-hearts" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
     <div class="hero-content">
       <p class="hero-eyebrow reveal">- Together Forever -</p>
       <h1 class="hero-name reveal">
@@ -61,13 +81,12 @@
         <span class="name-ampersand">&</span>
         <span class="name-groom">Daniel</span>
       </h1>
-      <p class="hero-surname reveal">Adewale &nbsp;·&nbsp; Matthews</p>
+      <p class="hero-surname reveal">Adewale &nbsp;.&nbsp; Matt</p>
       <div class="hero-divider reveal">
         <span></span><svg viewBox="0 0 40 20" width="40"><path d="M20 2 Q30 10 20 18 Q10 10 20 2Z" fill="rgba(107,120,60,0.7)"/></svg><span></span>
       </div>
-      <p class="hero-date reveal">Friday, the Twenty-Ninth of May · 2026</p>
-      <!-- <a href="#rsvp" class="hero-cta reveal">Kindly RSVP</a> -->
-    </div>  
+      <p class="hero-date reveal">Friday, 26th of June 2026</p>
+    </div>
 
     <div class="hero-scroll-hint">
       <span>Scroll</span>
@@ -75,21 +94,45 @@
     </div>
   </section>
 
-  <!-- ─── COUNTDOWN ─── -->
+  <!-- FAMILIES -->
+  <section id="families">
+    <div class="section-tag reveal">The Families Of</div>
+    <!-- <h2 class="section-heading reveal">Adewale &amp; Akinsokan</h2> -->
+    <div class="families-card reveal">
+      <div class="families-watermark">A <span>&amp;</span> A</div>
+      <div class="families-grid">
+        <div class="family-side">
+          <p class="families-label">The Groom's Family</p>
+          <p class="families-name">Hon. Samuel Febisola Adewale</p>
+          <p class="families-link">and</p>
+          <p class="families-name">Late Mrs Omolola Adewale</p>
+        </div>
+        <div class="family-side">
+          <p class="families-label">The Bride's Family</p>
+          <p class="families-name">Evang. Daniel-Matt Akinsokan</p>
+          <p class="families-link">and</p>
+          <p class="families-name">Dcns Morayo Akinsokan</p>
+        </div>
+      </div>
+      <p class="families-intro">Cordially invite you to the wedding celebration of their beloved children</p>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
   <section id="countdown">
     <div class="countdown-label">Days Until We Say I Do</div>
     <div class="countdown-grid">
       <div class="countdown-unit"><span id="cd-days">00</span><label>Days</label></div>
-      <div class="countdown-dot">·</div>
+      <div class="countdown-dot">.</div>
       <div class="countdown-unit"><span id="cd-hours">00</span><label>Hours</label></div>
-      <div class="countdown-dot">·</div>
+      <div class="countdown-dot">.</div>
       <div class="countdown-unit"><span id="cd-mins">00</span><label>Minutes</label></div>
-      <div class="countdown-dot">·</div>
+      <div class="countdown-dot">.</div>
       <div class="countdown-unit"><span id="cd-secs">00</span><label>Seconds</label></div>
     </div>
   </section>
 
-  <!-- ─── STORY ─── -->
+  <!-- STORY -->
   <section id="story">
     <div class="section-tag reveal">Our Story</div>
     <h2 class="section-heading reveal">How It All Began</h2>
@@ -99,38 +142,56 @@
         <div class="story-icon">
           <svg viewBox="0 0 48 48" fill="none"><path d="M24 8C14 8 6 16 6 26c0 12 18 26 18 26s18-14 18-26c0-10-8-18-18-18z" fill="rgba(107,120,60,0.15)" stroke="#6b783c" stroke-width="1.5"/><circle cx="24" cy="26" r="4" fill="#6b783c"/></svg>
         </div>
-        <h3>The Meeting</h3>
-        <p class="story-date">June 2023</p>
-        <p>Two souls crossed paths at a Church Fellowship. A glance, a smile, and a conversation that lasted until dawn.</p>
+        <h3>How We Met</h3>
+        <p class="story-date">2017</p>
+        <p class="story-excerpt">Our story began back in 2017 at the GSF campus fellowship at FUTA, when DM first noticed Oreoluwa as the beautiful but seemingly stubborn younger sister of a choir member.</p>
+        <button class="story-readmore" type="button" data-story-target="how-we-met">Read More</button>
       </div>
+
       <div class="story-card reveal" data-delay="150">
         <div class="story-icon">
           <svg viewBox="0 0 48 48" fill="none"><path d="M24 10 L28 18 L38 19.5 L31 26.5 L32.5 36.5 L24 32 L15.5 36.5 L17 26.5 L10 19.5 L20 18Z" fill="rgba(107,120,60,0.15)" stroke="#6b783c" stroke-width="1.5"/></svg>
         </div>
         <h3>The Courtship</h3>
-        <p class="story-date">2024-2026</p>
-        <p>Long walks, stolen moments, laughter and tears shared in equal measure. Every season deepened the bond.</p>
+        <p class="story-date">1st March 2024</p>
+        <p class="story-excerpt">Despite her tough exterior, DM's persistent kindness slowly began to melt the ice. He constantly defended her, checked on her, and kept showing up until friendship blossomed into love.</p>
+        <button class="story-readmore" type="button" data-story-target="the-courtship">Read More</button>
       </div>
+
       <div class="story-card reveal" data-delay="300">
         <div class="story-icon">
           <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="12" fill="rgba(107,120,60,0.15)" stroke="#6b783c" stroke-width="1.5"/><path d="M18 24l4 4 8-8" stroke="#6b783c" stroke-width="2" stroke-linecap="round"/></svg>
         </div>
         <h3>The Proposal</h3>
-        <p class="story-date">March 2026</p>
-        <p>Under a canopy of stars, Daniel knelt and asked the question that changed everything. She said yes - a thousand times, yes.</p>
+        <p class="story-date">1st March 2026</p>
+        <p class="story-excerpt">Knowing Oreoluwa was notoriously inquisitive and claimed she could never be surprised, DM carefully orchestrated a masterclass in misdirection before asking her to be his wife.</p>
+        <button class="story-readmore" type="button" data-story-target="the-proposal">Read More</button>
       </div>
+
       <div class="story-card reveal" data-delay="450">
         <div class="story-icon">
           <svg viewBox="0 0 48 48" fill="none"><path d="M24 12 C16 12 10 18 10 24 C10 36 24 42 24 42 C24 42 38 36 38 24 C38 18 32 12 24 12Z" fill="rgba(107,120,60,0.15)" stroke="#6b783c" stroke-width="1.5"/></svg>
         </div>
-        <h3>Forever</h3>
-        <p class="story-date">May 2026</p>
-        <p>Now they stand at the threshold of forever, ready to write the most beautiful chapter yet - together.</p>
+        <h3>Forever After</h3>
+        <p class="story-date">26th June 2026</p>
+        <p class="story-excerpt">The girl who once plotted to frustrate him in the ushering unit is now completely obsessed, and the guy who wanted to mentor her found his lifetime partner.</p>
+        <button class="story-readmore" type="button" data-story-target="forever-after">Read More</button>
       </div>
     </div>
   </section>
 
-  <!-- ─── GALLERY ─── -->
+  <!-- STORY MODAL -->
+  <div class="story-modal" id="storyModal" aria-hidden="true">
+    <div class="story-modal-backdrop" data-story-close></div>
+    <div class="story-modal-panel" role="dialog" aria-modal="true" aria-labelledby="storyModalTitle">
+      <button class="story-modal-close" type="button" data-story-close aria-label="Close story modal">&times;</button>
+      <p class="story-modal-date" id="storyModalDate"></p>
+      <h3 id="storyModalTitle"></h3>
+      <div class="story-modal-body" id="storyModalBody"></div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
   <section id="gallery">
     <div class="section-tag reveal">Captured Moments</div>
     <h2 class="section-heading reveal">Our Gallery</h2>
@@ -206,7 +267,7 @@
     </div>
   </section>
 
-  <!-- ─── LIGHTBOX ─── -->
+  <!-- LIGHTBOX -->
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
     <button class="lightbox-close" id="lbClose" aria-label="Close">&times;</button>
     <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous">&#8592;</button>
@@ -217,7 +278,7 @@
     <div class="lightbox-counter" id="lbCounter"></div>
   </div>
 
-  <!-- ─── VIDEO ─── -->
+  <!-- VIDEO -->
   <section id="video">
     <div class="video-bg-text">LOVE</div>
     <div class="section-tag reveal" style="color:#e8e4d8;">Our Proposal</div>
@@ -235,7 +296,7 @@
     </div>
   </section>
 
-  <!-- ─── QUOTE ─── -->
+  <!-- QUOTE -->
   <section id="quote">
     <div class="quote-leaf quote-leaf--1"></div>
     <div class="quote-leaf quote-leaf--2"></div>
@@ -245,7 +306,7 @@
     </blockquote>
   </section>
 
-  <!-- ─── DETAILS ─── -->
+  <!-- DETAILS -->
   <section id="details">
     <div class="section-tag reveal">The Celebration</div>
     <h2 class="section-heading reveal">Wedding Details</h2>
@@ -256,29 +317,31 @@
           <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="10" width="32" height="34" rx="3" fill="rgba(107,120,60,0.12)" stroke="#6b783c" stroke-width="1.5"/><path d="M16 6v8M32 6v8M8 22h32" stroke="#6b783c" stroke-width="1.5" stroke-linecap="round"/><rect x="16" y="28" width="6" height="6" rx="1" fill="#6b783c"/></svg>
         </div>
         <h3>The Ceremony</h3>
-        <p class="detail-time">10:00 AM</p>
-        <p>Friday, 29th May 2026</p>
-        <p class="detail-venue"><br/>Emure, Ekiti</p>
+        <p class="detail-time">9:00 AM</p>
+        <p>Friday, 26th June 2026</p>
+        <p class="detail-venue"><br/>Church by 9am</p>
       </div>
 
-      <div class="detail-card reveal feature-card" data-delay="200">
-        <div class="monogram-large">O<span>&</span>D</div>
-        <p class="feature-tagline">Two hearts, one forever</p>
-        <div class="petal-row">
-          <svg viewBox="0 0 12 20" width="12"><path d="M6 0 Q10 10 6 20 Q2 10 6 0Z" fill="rgba(107,120,60,0.5)"/></svg>
-          <svg viewBox="0 0 12 20" width="12"><path d="M6 0 Q10 10 6 20 Q2 10 6 0Z" fill="rgba(107,120,60,0.6)"/></svg>
-          <svg viewBox="0 0 12 20" width="12"><path d="M6 0 Q10 10 6 20 Q2 10 6 0Z" fill="rgba(107,120,60,0.5)"/></svg>
+      <div class="detail-card reveal" data-delay="220">
+        <div class="detail-icon">
+          <svg viewBox="0 0 48 48" fill="none"><path d="M10 14 Q24 6 38 14 L38 36 Q24 44 10 36Z" fill="rgba(107,120,60,0.12)" stroke="#6b783c" stroke-width="1.5"/><path d="M24 20v8M20 24h8" stroke="#6b783c" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
+        <h3>The Traditional</h3>
+        <p class="detail-time">12:00 PM</p>
+        <p>Friday, 26th June 2026</p>
+        <p class="detail-venue">Oremeji Memorial Hall<br/>Emure Ekiti</p>
+        <a class="venue-link" href="https://www.google.com/maps/dir/?api=1&destination=Oremeji%20Memorial%20Hall%2C%20Emure%20Ekiti%2C%20Ekiti%20State%2C%20Nigeria" target="_blank" rel="noopener">Open in Google Maps</a>
       </div>
 
       <div class="detail-card reveal" data-delay="400">
         <div class="detail-icon">
-          <svg viewBox="0 0 48 48" fill="none"><path d="M10 14 Q24 6 38 14 L38 36 Q24 44 10 36Z" fill="rgba(107,120,60,0.12)" stroke="#6b783c" stroke-width="1.5"/><path d="M24 20v8M20 24h8" stroke="#6b783c" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 48 48" fill="none"><path d="M12 16h24v16H12z" fill="rgba(107,120,60,0.12)" stroke="#6b783c" stroke-width="1.5"/><path d="M16 20h16M16 25h10M16 30h14" stroke="#6b783c" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
         <h3>The Reception</h3>
-        <p class="detail-time">2:00 PM</p>
-        <p>Friday, 29th May 2026</p>
-        <p class="detail-venue"><br/>Emure, Ekiti</p>
+        <p class="detail-time">Immediately After</p>
+        <p>Friday, 26th June 2026</p>
+        <p class="detail-venue">Same venue as the Traditional</p>
+        <a class="venue-link" href="https://www.google.com/maps/dir/?api=1&destination=Oremeji%20Memorial%20Hall%2C%20Emure%20Ekiti%2C%20Ekiti%20State%2C%20Nigeria" target="_blank" rel="noopener">Open in Google Maps</a>
       </div>
     </div>
 
@@ -287,18 +350,20 @@
       <div class="dress-swatches">
         <span class="swatch swatch--olive" title="Olive Green"></span>
         <span class="swatch swatch--cream" title="Ivory Cream"></span>
-                <span class="swatch swatch--white" title="White"></span>
+        <span class="swatch swatch--white" title="White"></span>
         <span class="swatch swatch--gold" title="Champagne Gold"></span>
       </div>
-      <p>Olive green, ivory cream, White and gold</p>
+      <p>Olive green, ivory cream, white and gold</p>
     </div>
   </section>
 
+  <!-- RSVP -->
   <section id="rsvp">
     <div class="rsvp-bg-overlay"></div>
     <div class="section-tag reveal" style="color:rgba(245,240,232,0.7);">Join Us</div>
     <h2 class="section-heading reveal" style="color:#f5f0e8;">Kindly RSVP</h2>
     <p class="section-sub reveal" style="color:rgba(245,240,232,0.65);">Please respond by the 1st of May, 2026</p>
+    <p class="rsvp-contact reveal" style="color:rgba(245,240,232,0.82);">For more information, contact Trusted: 08104495170 or Felix: 09016418363</p>
 
     <div class="rsvp-form-wrap reveal">
       <div class="rsvp-form" id="rsvpForm">
@@ -316,7 +381,7 @@
           <div class="form-group">
             <label for="fattend">Will you attend?</label>
             <select id="fattend">
-              <option value="">Select one…</option>
+              <option value="">Select one...</option>
               <option value="yes">Joyfully Accept</option>
               <option value="no">Regretfully Decline</option>
             </select>
@@ -328,7 +393,7 @@
         </div>
         <div class="form-group full">
           <label for="fmessage">Leave a Message</label>
-          <textarea id="fmessage" rows="4" placeholder="Share your wishes for the couple…"></textarea>
+          <textarea id="fmessage" rows="4" placeholder="Share your wishes for the couple..."></textarea>
         </div>
         <button class="rsvp-submit" id="rsvpSubmit">Send RSVP</button>
       </div>
@@ -337,16 +402,16 @@
           <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="28" stroke="#6b783c" stroke-width="1.5"/><path d="M18 30l8 8 16-16" stroke="#6b783c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h3>Thank you!</h3>
-        <p>Your RSVP has been received. We can't wait to celebrate with you.</p>
+        <p>Your RSVP has been received. We can't wait to celebrate with you. For more information, contact Trusted: 08104495170 or Felix: 09016418363.</p>
       </div>
     </div>
   </section>
 
-  <!-- ─── FOOTER ─── -->
+  <!-- FOOTER -->
   <footer id="footer">
     <div class="footer-monogram">O <span>&</span> D</div>
-    <p class="footer-names">Oreoluwa Adewale &nbsp;&amp;&nbsp; Daniel Matthews</p>
-    <p class="footer-date">29 · 05 · 2026</p>
+    <p class="footer-names">Oreoluwa Adewale &nbsp;&amp;&nbsp; Daniel Matt</p>
+    <p class="footer-date">26 &middot; 06 &middot; 2026</p>
     <div class="footer-divider">
       <svg viewBox="0 0 120 20" width="120"><path d="M0 10 Q30 2 60 10 Q90 18 120 10" stroke="rgba(107,120,60,0.4)" stroke-width="1" fill="none"/></svg>
     </div>
@@ -355,7 +420,7 @@
   </footer>
 
   <!-- background music -->
-  <audio id="bgAudio" src="oruka.mp3" preload="auto"></audio>
+  <audio id="bgAudio" src="perfect.mp3" preload="auto" autoplay loop></audio>
 
   <script src="script.js"></script>
 </body>
