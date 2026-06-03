@@ -151,9 +151,9 @@ a { text-decoration: none; color: inherit; }
   display: flex; flex-direction: column;
   position: fixed; inset: 0;
   background:
-    radial-gradient(circle at 20% 10%, rgba(217, 180, 74, 0.16), transparent 20%),
-    radial-gradient(circle at 80% 18%, rgba(192, 64, 64, 0.12), transparent 18%),
-    linear-gradient(180deg, rgba(18,10,5,0.98), rgba(30,18,10,0.99));
+    radial-gradient(circle at 20% 10%, rgba(217, 180, 74, 0.2), transparent 20%),
+    radial-gradient(circle at 80% 18%, rgba(192, 64, 64, 0.16), transparent 18%),
+    linear-gradient(180deg, rgba(18,10,5,0.99), rgba(30,18,10,0.995));
   align-items: center; justify-content: center;
   gap: 1.4rem;
   z-index: 9999;
@@ -178,6 +178,18 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* keep navbar backed when menu is open (any screen size) */
+#navbar.menu-open::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(217, 180, 74, 0.2), transparent 20%),
+    radial-gradient(circle at 80% 18%, rgba(192, 64, 64, 0.16), transparent 18%),
+    linear-gradient(180deg, rgba(18,10,5,0.99), rgba(30,18,10,0.995));
+  z-index: 9998;
+  pointer-events: none;
+}
+
 #navbar.menu-open {
   position: fixed;
   inset: 0;
@@ -185,9 +197,9 @@ a { text-decoration: none; color: inherit; }
   justify-content: flex-start;
   padding: 1.3rem 1.1rem;
   background:
-    radial-gradient(circle at 20% 10%, rgba(217, 180, 74, 0.16), transparent 20%),
-    radial-gradient(circle at 80% 18%, rgba(192, 64, 64, 0.12), transparent 18%),
-    linear-gradient(180deg, rgba(18,10,5,0.98), rgba(30,18,10,0.99));
+    radial-gradient(circle at 20% 10%, rgba(217, 180, 74, 0.2), transparent 20%),
+    radial-gradient(circle at 80% 18%, rgba(192, 64, 64, 0.16), transparent 18%),
+    linear-gradient(180deg, rgba(18,10,5,0.99), rgba(30,18,10,0.995));
   z-index: 10000;
   overflow: hidden;
 }
@@ -920,6 +932,303 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 480px) {
   .details-grid { grid-template-columns: 1fr; }
   .feature-card { min-width: unset; }
+}
+
+/* === NEW WEDDING SECTIONS === */
+#party {
+  padding: var(--section-pad);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(217, 180, 74, 0.08), transparent 28%),
+    linear-gradient(180deg, #f7f2ea 0%, #f2ece2 100%);
+}
+
+.party-layout {
+  max-width: 1240px;
+  margin: 3rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.5rem;
+}
+
+.party-column {
+  min-width: 0;
+}
+
+.party-heading {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.party-kicker {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.7rem;
+}
+
+.party-heading h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 400;
+  color: var(--olive-dark);
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.party-card {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(107, 120, 60, 0.12);
+  box-shadow: 0 18px 36px rgba(74, 84, 41, 0.08);
+  overflow: hidden;
+  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
+}
+
+.party-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 48px rgba(74, 84, 41, 0.12);
+}
+
+.party-frame {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--cream-dark);
+}
+
+.party-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: zoom-in;
+}
+
+.party-card-copy {
+  padding: 1rem 0.9rem 1.1rem;
+  text-align: center;
+}
+
+.party-role {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.45rem;
+}
+
+.party-card h4 {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: var(--olive-dark);
+}
+
+#gifts {
+  padding: var(--section-pad);
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.6), transparent 54%),
+    linear-gradient(180deg, #f4efe6 0%, #ebe3d8 100%);
+}
+
+.gifts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  max-width: 920px;
+  margin: 3rem auto 0;
+}
+
+.gift-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(107, 120, 60, 0.12);
+  box-shadow: 0 20px 42px rgba(74, 84, 41, 0.08);
+  text-align: center;
+  padding: 2.4rem 1.5rem 2rem;
+  overflow: hidden;
+}
+
+.gift-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.gift-symbol {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.gift-bank {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--olive);
+  margin-bottom: 1.1rem;
+}
+
+.gift-number {
+  display: inline-block;
+  padding: 0.9rem 1.2rem;
+  background: rgba(107, 120, 60, 0.08);
+  border: 1px solid rgba(107, 120, 60, 0.12);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.16em;
+  color: var(--olive-dark);
+  margin-bottom: 1rem;
+}
+
+.gift-name {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--ink);
+}
+
+.media-section {
+  padding: var(--section-pad);
+}
+
+.media-section--dark {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(217, 180, 74, 0.1), transparent 25%),
+    linear-gradient(180deg, #4a5429 0%, #36401f 100%);
+}
+
+.media-section--dark .section-heading,
+.media-section--dark .section-sub {
+  color: var(--cream);
+}
+
+.media-section--dark .section-sub {
+  color: rgba(245, 240, 232, 0.72);
+}
+
+.media-section--soft {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(217, 180, 74, 0.08), transparent 32%),
+    linear-gradient(180deg, #eef0e2 0%, #e9ead9 100%);
+}
+
+.journey-layout {
+  max-width: 1260px;
+  margin: 3rem auto 0;
+  display: grid;
+  grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.4fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.journey-cover {
+  margin: 0;
+  border: 1px solid rgba(200, 169, 110, 0.2);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.journey-cover img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  cursor: zoom-in;
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.media-card {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid rgba(107, 120, 60, 0.12);
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 18px 36px rgba(74, 84, 41, 0.08);
+}
+
+.media-card--tall {
+  aspect-ratio: 3 / 4;
+}
+
+.media-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: zoom-in;
+}
+
+#proposal .media-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+#proposal .media-card {
+  aspect-ratio: 1 / 1.15;
+}
+
+#proposal .media-card--tall {
+  aspect-ratio: 1 / 1.35;
+}
+
+#court-wedding .media-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+#court-wedding .media-card {
+  aspect-ratio: 1 / 1.08;
+}
+
+.lightboxable {
+  cursor: zoom-in;
+}
+
+@media (max-width: 980px) {
+  .party-layout,
+  .journey-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .party-grid,
+  .gifts-grid,
+  #proposal .media-grid,
+  #court-wedding .media-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .party-grid,
+  .gifts-grid,
+  .media-grid,
+  #proposal .media-grid,
+  #court-wedding .media-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .party-layout,
+  .journey-layout,
+  .gifts-grid {
+    gap: 1.1rem;
+  }
+
+  .gift-number {
+    font-size: 0.95rem;
+  }
 }
 
 .global-floaters {

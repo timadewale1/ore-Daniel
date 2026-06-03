@@ -33,6 +33,152 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.style.overflow = 'hidden';
 
   /* ---------------------------------------------------------
+     2. WEDDING PARTY + MEDIA GROUPS
+  --------------------------------------------------------- */
+  const PARTY_DATA = {
+    bridesmaids: [
+      { file: 'Adelekun Roseline.jpeg', name: 'Adelekun Roseline', role: 'Bridesmaid' },
+      { file: 'Adeyeye Peace.jpeg', name: 'Adeyeye Peace', role: 'Bridesmaid' },
+      { file: 'Akinojo Motunrayo Chief Bridesmaid.jpeg', name: 'Chief Bridesmaid Akinojo Motunrayo', role: 'Chief Bridesmaid' },
+      { file: 'Ayodele Eunice.jpeg', name: 'Ayodele Eunice', role: 'Bridesmaid' },
+      { file: 'Familua Oluwadamilola.jpeg', name: 'Familua Oluwadamilola', role: 'Bridesmaid' },
+      { file: 'Mayowa Adewale.jpeg', name: 'Mayowa Adewale', role: 'Bridesmaid' },
+      { file: 'Tommy Catherine.jpeg', name: 'Tommy Catherine', role: 'Bridesmaid' }
+    ],
+    groomsmen: [
+      { file: 'Agboola Sola.jpeg', name: 'Agboola Sola', role: 'Groomsman' },
+      { file: 'Ayomide Ogunmola.jpeg', name: 'Ayomide Ogunmola', role: 'Groomsman' },
+      { file: 'Idowu Oladimeji.jpeg', name: 'Idowu Oladimeji', role: 'Groomsman' },
+      { file: 'Kehinde Olatunde.jpeg', name: 'Kehinde Olatunde', role: 'Groomsman' }
+    ]
+  };
+
+  const JOURNEY_FILES = [
+    'WhatsApp Image 2026-05-19 at 6.17.29 PM.jpeg',
+    'WhatsApp Image 2026-05-19 at 6.17.42 PM.jpeg',
+    'WhatsApp Image 2026-05-19 at 6.17.56 PM.jpeg',
+    'WhatsApp Image 2026-05-19 at 6.18.04 PM.jpeg',
+    'WhatsApp Image 2026-05-19 at 6.18.12 PM.jpeg',
+    'WhatsApp Image 2026-05-19 at 6.18.18 PM.jpeg',
+    'WhatsApp Image 2026-05-19 at 6.19.28 PM.jpeg'
+  ];
+
+  const PROPOSAL_FILES = [
+    '1.jpg',
+    '2.jpg',
+    '3.jpg',
+    '4.jpg',
+    '5.jpg',
+    '6.jpg',
+    '7.jpg',
+    '8.jpg',
+    '9.jpg',
+    '10.jpg',
+    '11.jpg',
+    '12.jpg'
+  ];
+
+  const COURT_WEDDING_FILES = [
+    'WhatsApp Image 2026-05-28 at 9.15.55 AM.jpeg',
+    'WhatsApp Image 2026-05-28 at 9.15.56 AM.jpeg',
+    'WhatsApp Image 2026-05-28 at 9.15.59 AM.jpeg',
+    'WhatsApp Image 2026-05-28 at 9.15.59 AM (1).jpeg',
+    'WhatsApp Image 2026-05-28 at 9.15.59 AM (2).jpeg',
+    'WhatsApp Image 2026-05-28 at 9.16.01 AM.jpeg'
+  ];
+
+  const encodeAsset = (folder, file) => encodeURI(`pictures/${folder}/${file}`);
+  const fileBaseName = (file) => file.replace(/\.[^.]+$/, '');
+
+  const escapeHtml = (value) =>
+    String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+
+  const renderPartyCards = () => {
+    const bridesmaidGrid = document.getElementById('bridesmaidGrid');
+    const groomsmenGrid = document.getElementById('groomsmenGrid');
+
+    if (bridesmaidGrid) {
+      bridesmaidGrid.innerHTML = PARTY_DATA.bridesmaids
+        .map((person, index) => {
+          const src = encodeAsset('bridesmaid', person.file);
+          return `
+            <article class="party-card reveal" data-delay="${index * 60}">
+              <div class="party-frame">
+                <img class="lightboxable" data-lightbox-group="party" src="${src}" alt="${escapeHtml(person.name)}" loading="lazy"/>
+              </div>
+              <div class="party-card-copy">
+                <p class="party-role">${escapeHtml(person.role)}</p>
+                <h4>${escapeHtml(person.name)}</h4>
+              </div>
+            </article>
+          `;
+        })
+        .join('');
+    }
+
+    if (groomsmenGrid) {
+      groomsmenGrid.innerHTML = PARTY_DATA.groomsmen
+        .map((person, index) => {
+          const src = encodeAsset('groomsmen', person.file);
+          return `
+            <article class="party-card reveal" data-delay="${index * 60}">
+              <div class="party-frame">
+                <img class="lightboxable" data-lightbox-group="party" src="${src}" alt="${escapeHtml(person.name)}" loading="lazy"/>
+              </div>
+              <div class="party-card-copy">
+                <p class="party-role">${escapeHtml(person.role)}</p>
+                <h4>${escapeHtml(person.name)}</h4>
+              </div>
+            </article>
+          `;
+        })
+        .join('');
+    }
+  };
+
+  const renderMasonryGrid = (container, folder, files, groupName) => {
+    if (!container) return;
+
+    container.innerHTML = files
+      .map((file, index) => {
+        const src = encodeAsset(folder, file);
+        const tall = index % 4 === 0 ? ' media-card--tall' : '';
+        const delay = index * 70;
+        return `
+          <article class="media-card${tall} reveal" data-delay="${delay}">
+            <img class="lightboxable" data-lightbox-group="${groupName}" src="${src}" alt="${escapeHtml(fileBaseName(file))}" loading="lazy"/>
+          </article>
+        `;
+      })
+      .join('');
+  };
+
+  const renderJourney = () => {
+    const journeyGrid = document.getElementById('journeyGrid');
+    renderMasonryGrid(journeyGrid, 'journey', JOURNEY_FILES, 'journey');
+  };
+
+  const renderProposal = () => {
+    const proposalGrid = document.getElementById('proposalGrid');
+    renderMasonryGrid(proposalGrid, 'proposal', PROPOSAL_FILES, 'proposal');
+  };
+
+  const renderCourtWedding = () => {
+    const courtWeddingGrid = document.getElementById('courtWeddingGrid');
+    renderMasonryGrid(courtWeddingGrid, 'court wedding', COURT_WEDDING_FILES, 'court wedding');
+  };
+
+  renderPartyCards();
+  renderJourney();
+  renderProposal();
+  renderCourtWedding();
+
+  /* ---------------------------------------------------------
      2. HERO STAGGERED REVEAL
   --------------------------------------------------------- */
   function triggerHeroReveal() {
@@ -244,7 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------------------------------------------------------
      7. GALLERY LIGHTBOX
   --------------------------------------------------------- */
-  const galleryItems = document.querySelectorAll('.gallery-item');
+  const galleryItems = document.querySelectorAll('.lightboxable');
   const lightbox = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
   const lbClose = document.getElementById('lbClose');
@@ -261,16 +407,14 @@ document.addEventListener('DOMContentLoaded', () => {
     lbNext &&
     lbCounter
   ) {
-    const images = Array.from(galleryItems)
-      .map((item) => item.querySelector('img'))
-      .filter(Boolean)
-      .map((img) => img.src);
+    const images = Array.from(galleryItems);
 
     let currentIndex = 0;
 
     function openLightbox(index) {
       currentIndex = index;
-      lbImg.src = images[index];
+      lbImg.src = images[index].src;
+      lbImg.alt = images[index].alt || 'Wedding image';
       lbCounter.textContent = `${index + 1} / ${images.length}`;
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
@@ -286,7 +430,8 @@ document.addEventListener('DOMContentLoaded', () => {
       lbImg.style.opacity = '0';
       lbImg.style.transform = 'scale(0.97)';
       setTimeout(() => {
-        lbImg.src = images[currentIndex];
+        lbImg.src = images[currentIndex].src;
+        lbImg.alt = images[currentIndex].alt || 'Wedding image';
         lbCounter.textContent = `${currentIndex + 1} / ${images.length}`;
         lbImg.style.opacity = '1';
         lbImg.style.transform = 'scale(1)';
@@ -326,6 +471,19 @@ document.addEventListener('DOMContentLoaded', () => {
     lightbox.addEventListener('touchend', (e) => {
       const dx = e.changedTouches[0].clientX - touchStartX;
       if (Math.abs(dx) > 50) navigate(dx < 0 ? 1 : -1);
+    });
+
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => openLightbox(index));
+      img.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openLightbox(index);
+        }
+      });
+      img.tabIndex = 0;
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-label', `Open image ${index + 1}`);
     });
   }
 
