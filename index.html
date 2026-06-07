@@ -11,8 +11,10 @@
 
   <!-- PRELOADER -->
   <div id="preloader">
-    <div class="pre-monogram">O <span>&</span> D</div>
-    <div class="pre-line"></div>
+    <div id="preloaderBg"></div>
+    <video id="logoRevealVideo" autoplay muted playsinline style="width: 100%; height: 100%; object-fit: contain; position: relative; z-index: 10;">
+      <source src="video/LogoReveal.MP4" type="video/mp4"/>
+    </video>
   </div>
 
   <!-- GLOBAL DECOR -->
@@ -33,7 +35,7 @@
 
   <!-- NAVIGATION -->
   <nav id="navbar">
-    <div class="nav-monogram">O & D</div>
+    <div class="nav-monogram"><img src="pictures/EG1Black 2.PNG" alt="EG Logo" style="height: 50px; width: auto;"/></div>
     <ul class="nav-links">
       <li><a href="#party">Wedding Party</a></li>
       <li><a href="#gifts">Gifts</a></li>
@@ -82,18 +84,12 @@
       <h1 class="hero-name reveal">
         <span class="name-bride">Oreoluwa</span>
         <span class="name-ampersand">&</span>
-        <span class="name-groom">Daniel</span>
+        <span class="name-groom">Daniel-Matt</span>
       </h1>
-      <p class="hero-surname reveal">Adewale &nbsp;.&nbsp; Matt</p>
       <div class="hero-divider reveal">
         <span></span><svg viewBox="0 0 40 20" width="40"><path d="M20 2 Q30 10 20 18 Q10 10 20 2Z" fill="rgba(107,120,60,0.7)"/></svg><span></span>
       </div>
       <p class="hero-date reveal">Friday, 26th of June 2026</p>
-    </div>
-
-    <div class="hero-scroll-hint">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
     </div>
   </section>
 
@@ -105,79 +101,19 @@
       <div class="families-watermark">A <span>&amp;</span> A</div>
       <div class="families-grid">
         <div class="family-side">
-          <p class="families-label">The Groom's Family</p>
+          <p class="families-label">The Bride's Family</p>
           <p class="families-name">Hon. Samuel Febisola Adewale</p>
           <p class="families-link">and</p>
           <p class="families-name">Late Mrs Omolola Adewale</p>
         </div>
         <div class="family-side">
-          <p class="families-label">The Bride's Family</p>
-          <p class="families-name">Evang. Daniel-Matt Akinsokan</p>
+          <p class="families-label">The Groom's Family</p>
+          <p class="families-name">Evang. Akinsokan Daniel</p>
           <p class="families-link">and</p>
           <p class="families-name">Dcns Morayo Akinsokan</p>
         </div>
       </div>
       <p class="families-intro">Cordially invite you to the wedding celebration of their beloved children</p>
-    </div>
-  </section>
-
-  <!-- PARTY -->
-  <section id="party">
-    <div class="section-tag reveal">The Inner Circle</div>
-    <h2 class="section-heading reveal">Wedding Party</h2>
-    <p class="section-sub reveal">The people standing close to this beautiful forever</p>
-
-    <div class="party-layout">
-      <div class="party-column">
-        <div class="party-heading reveal" data-delay="0">
-          <span class="party-kicker">Bride's Train</span>
-          <h3>Bridesmaids</h3>
-        </div>
-        <div class="party-grid" id="bridesmaidGrid"></div>
-      </div>
-      <div class="party-column">
-        <div class="party-heading reveal" data-delay="0">
-          <span class="party-kicker">Groom's Squad</span>
-          <h3>Groomsmen</h3>
-        </div>
-        <div class="party-grid party-grid--groom" id="groomsmenGrid"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GIFTS -->
-  <section id="gifts">
-    <div class="section-tag reveal">Blessings & Tokens</div>
-    <h2 class="section-heading reveal">Honour Them With Gifts</h2>
-    <p class="section-sub reveal">Your presence is already a gift we cherish. If you would love to bless us further, these are the gift details.</p>
-
-    <div class="gifts-grid">
-      <article class="gift-card reveal" data-delay="0">
-        <div class="gift-symbol">&#8358;</div>
-        <p class="gift-bank">GT Bank</p>
-        <p class="gift-number">0428728217</p>
-        <p class="gift-name">Adewale Ore Ruth</p>
-      </article>
-      <article class="gift-card reveal" data-delay="120">
-        <div class="gift-symbol">$</div>
-        <p class="gift-bank">Wema $dom account</p>
-        <p class="gift-number">0621687446</p>
-        <p class="gift-name">Daniel Matthew</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- COUNTDOWN -->
-  <section id="countdown">
-    <div class="countdown-label">Days Until We Say I Do</div>
-    <div class="countdown-grid">
-      <div class="countdown-unit"><span id="cd-days">00</span><label>Days</label></div>
-      <div class="countdown-dot">.</div>
-      <div class="countdown-unit"><span id="cd-hours">00</span><label>Hours</label></div>
-      <div class="countdown-dot">.</div>
-      <div class="countdown-unit"><span id="cd-mins">00</span><label>Minutes</label></div>
-      <div class="countdown-dot">.</div>
-      <div class="countdown-unit"><span id="cd-secs">00</span><label>Seconds</label></div>
     </div>
   </section>
 
@@ -248,7 +184,7 @@
 
     <div class="journey-layout">
       <figure class="journey-cover reveal" data-delay="0">
-        <img src="pictures/journey/cover.jpeg" alt="Journey cover" loading="lazy"/>
+        <img src="pictures/journey/01.PNG" alt="Journey cover" loading="lazy"/>
       </figure>
       <div class="media-grid journey-grid" id="journeyGrid"></div>
     </div>
@@ -268,6 +204,28 @@
     <h2 class="section-heading reveal">Signed With Joy</h2>
     <p class="section-sub reveal">A beautiful, quiet yes before the big day</p>
     <div class="media-grid court-grid" id="courtWeddingGrid"></div>
+  </section>
+
+  <!-- GIFTS -->
+  <section id="gifts">
+    <div class="section-tag reveal">Blessings & Tokens</div>
+    <h2 class="section-heading reveal">Honour Them With Gifts</h2>
+    <p class="section-sub reveal">Your presence is already a gift we cherish. If you would love to bless us further, these are the gift details.</p>
+
+    <div class="gifts-grid">
+      <article class="gift-card reveal" data-delay="0">
+        <div class="gift-symbol">&#8358;</div>
+        <p class="gift-bank">GT Bank</p>
+        <p class="gift-number">0428728217</p>
+        <p class="gift-name">Adewale Ore Ruth</p>
+      </article>
+      <article class="gift-card reveal" data-delay="120">
+        <div class="gift-symbol">$</div>
+        <p class="gift-bank">Wema $dom account</p>
+        <p class="gift-number">0621687446</p>
+        <p class="gift-name">Daniel Matthew</p>
+      </article>
+    </div>
   </section>
 
   <!-- LIGHTBOX -->
@@ -299,14 +257,28 @@
     </div>
   </section>
 
-  <!-- QUOTE -->
-  <section id="quote">
-    <div class="quote-leaf quote-leaf--1"></div>
-    <div class="quote-leaf quote-leaf--2"></div>
-    <blockquote class="reveal">
-      <p>"I have found the one whom my soul loves."</p>
-      <cite>- Song of Solomon 3:4</cite>
-    </blockquote>
+  <!-- PARTY -->
+  <section id="party">
+    <div class="section-tag reveal">The Inner Circle</div>
+    <h2 class="section-heading reveal">Wedding Party</h2>
+    <p class="section-sub reveal">The people standing close to this beautiful forever</p>
+
+    <div class="party-layout">
+      <div class="party-column">
+        <div class="party-heading reveal" data-delay="0">
+          <span class="party-kicker">Bride's Train</span>
+          <h3>Bridesmaids</h3>
+        </div>
+        <div class="party-grid" id="bridesmaidGrid"></div>
+      </div>
+      <div class="party-column">
+        <div class="party-heading reveal" data-delay="0">
+          <span class="party-kicker">Groom's Squad</span>
+          <h3>Groomsmen</h3>
+        </div>
+        <div class="party-grid party-grid--groom" id="groomsmenGrid"></div>
+      </div>
+    </div>
   </section>
 
   <!-- DETAILS -->
@@ -365,7 +337,6 @@
     <div class="rsvp-bg-overlay"></div>
     <div class="section-tag reveal" style="color:rgba(245,240,232,0.7);">Join Us</div>
     <h2 class="section-heading reveal" style="color:#f5f0e8;">Kindly RSVP</h2>
-    <p class="section-sub reveal" style="color:rgba(245,240,232,0.65);">Please respond by the 1st of May, 2026</p>
     <p class="rsvp-contact reveal" style="color:rgba(245,240,232,0.82);">For more information, contact Trusted: 08104495170 or Felix: 09016418363</p>
 
     <div class="rsvp-form-wrap reveal">
@@ -412,8 +383,8 @@
 
   <!-- FOOTER -->
   <footer id="footer">
-    <div class="footer-monogram">O <span>&</span> D</div>
-    <p class="footer-names">Oreoluwa Adewale &nbsp;&amp;&nbsp; Daniel Matt</p>
+    <div class="footer-monogram"><img src="pictures/EG1White 2.PNG" alt="EG Logo" style="height: 200px; width: auto;"/></div>
+    <p class="footer-names">Oreoluwa Adewale &nbsp;&amp;&nbsp; Daniel-Matt Akinsokan</p>
     <p class="footer-date">26 &middot; 06 &middot; 2026</p>
     <div class="footer-divider">
       <svg viewBox="0 0 120 20" width="120"><path d="M0 10 Q30 2 60 10 Q90 18 120 10" stroke="rgba(107,120,60,0.4)" stroke-width="1" fill="none"/></svg>

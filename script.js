@@ -22,12 +22,80 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', attemptAudioPlayback, { once: true });
 
   window.addEventListener('load', () => {
-    setTimeout(() => {
-      if (preloader) preloader.classList.add('hidden');
-      document.body.style.overflow = '';
-      triggerHeroReveal();
-      attemptAudioPlayback();
-    }, 1800);
+    const logoRevealVideo = document.getElementById('logoRevealVideo');
+    const preloaderBg = document.getElementById('preloaderBg');
+    
+    // Set random background images on preloader for desktop/tablet (non-mobile)
+    if (preloaderBg && window.innerWidth >= 768) {
+      const journeyImages = [
+        '01.PNG',
+        '02 2023.PNG',
+        '03.PNG',
+        '04.PNG',
+        '05.JPG',
+        '06.JPG',
+        '07.JPG',
+        'WhatsApp Image 2026-05-19 at 6.17.29 PM.jpeg',
+        'WhatsApp Image 2026-05-19 at 6.17.42 PM.jpeg',
+        'WhatsApp Image 2026-05-19 at 6.17.56 PM.jpeg',
+        'WhatsApp Image 2026-05-19 at 6.18.04 PM.jpeg',
+        'WhatsApp Image 2026-05-19 at 6.18.12 PM.jpeg',
+        'WhatsApp Image 2026-05-19 at 6.18.18 PM.jpeg',
+        'WhatsApp Image 2026-05-19 at 6.19.28 PM.jpeg'
+      ];
+      const proposalImages = [
+        'IMG00 10.JPG',
+        'IMG00 11.JPG',
+        'IMG00 12.JPG',
+        'IMG00 15.JPG',
+        'IMG00 18.JPG',
+        'IMG00 23.JPG',
+        'IMG00 24.JPG',
+        'IMG00 25.JPG',
+        'IMG00 29.JPG',
+        'IMG00 35.JPG',
+        'IMG00 37.JPG',
+        'IMG00 41.JPG',
+        'IMG00 46.JPG',
+        'IMG00 47.JPG',
+        'IMG00 7.JPG'
+      ];
+      
+      const leftImg = journeyImages[Math.floor(Math.random() * journeyImages.length)];
+      const rightImg = proposalImages[Math.floor(Math.random() * proposalImages.length)];
+      
+      const leftSide = document.createElement('div');
+      leftSide.className = 'preloader-side preloader-left';
+      leftSide.style.backgroundImage = `url('pictures/journey/${leftImg}')`;
+      
+      const rightSide = document.createElement('div');
+      rightSide.className = 'preloader-side preloader-right';
+      rightSide.style.backgroundImage = `url('pictures/proposal/${rightImg}')`;
+      
+      preloaderBg.appendChild(leftSide);
+      preloaderBg.appendChild(rightSide);
+    }
+    
+    if (logoRevealVideo) {
+      // Hide preloader when video ends or after 7000ms (whichever comes first)
+      const hidePreloader = () => {
+        if (preloader) preloader.classList.add('hidden');
+        document.body.style.overflow = '';
+        triggerHeroReveal();
+        attemptAudioPlayback();
+      };
+      
+      logoRevealVideo.addEventListener('ended', hidePreloader, { once: true });
+      setTimeout(hidePreloader, 7000);
+    } else {
+      // Fallback if video doesn't load
+      setTimeout(() => {
+        if (preloader) preloader.classList.add('hidden');
+        document.body.style.overflow = '';
+        triggerHeroReveal();
+        attemptAudioPlayback();
+      }, 7000);
+    }
   });
 
   document.body.style.overflow = 'hidden';
@@ -39,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bridesmaids: [
       { file: 'Adelekun Roseline.jpeg', name: 'Adelekun Roseline', role: 'Bridesmaid' },
       { file: 'Adeyeye Peace.jpeg', name: 'Adeyeye Peace', role: 'Bridesmaid' },
-      { file: 'Akinojo Motunrayo Chief Bridesmaid.jpeg', name: 'Chief Bridesmaid Akinojo Motunrayo', role: 'Chief Bridesmaid' },
+      { file: 'Akinojo Motunrayo Chief Bridesmaid.jpeg', name: 'Akinojo Motunrayo', role: 'Chief Bridesmaid' },
       { file: 'Ayodele Eunice.jpeg', name: 'Ayodele Eunice', role: 'Bridesmaid' },
       { file: 'Familua Oluwadamilola.jpeg', name: 'Familua Oluwadamilola', role: 'Bridesmaid' },
       { file: 'Mayowa Adewale.jpeg', name: 'Mayowa Adewale', role: 'Bridesmaid' },
@@ -49,11 +117,19 @@ document.addEventListener('DOMContentLoaded', () => {
       { file: 'Agboola Sola.jpeg', name: 'Agboola Sola', role: 'Groomsman' },
       { file: 'Ayomide Ogunmola.jpeg', name: 'Ayomide Ogunmola', role: 'Groomsman' },
       { file: 'Idowu Oladimeji.jpeg', name: 'Idowu Oladimeji', role: 'Groomsman' },
-      { file: 'Kehinde Olatunde.jpeg', name: 'Kehinde Olatunde', role: 'Groomsman' }
+      { file: 'Kehinde Olatunde.jpeg', name: 'Kehinde Olatunde', role: 'Groomsman' },
+      { file: 'Oluwatoba Dada.jpeg', name: 'Oluwatoba Dada', role: 'Groomsman' }
     ]
   };
 
   const JOURNEY_FILES = [
+    '01.PNG',
+    '02 2023.PNG',
+    '03.PNG',
+    '04.PNG',
+    '05.JPG',
+    '06.JPG',
+    '07.JPG',
     'WhatsApp Image 2026-05-19 at 6.17.29 PM.jpeg',
     'WhatsApp Image 2026-05-19 at 6.17.42 PM.jpeg',
     'WhatsApp Image 2026-05-19 at 6.17.56 PM.jpeg',
@@ -64,18 +140,21 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const PROPOSAL_FILES = [
-    '1.jpg',
-    '2.jpg',
-    '3.jpg',
-    '4.jpg',
-    '5.jpg',
-    '6.jpg',
-    '7.jpg',
-    '8.jpg',
-    '9.jpg',
-    '10.jpg',
-    '11.jpg',
-    '12.jpg'
+    'IMG00 10.JPG',
+    'IMG00 11.JPG',
+    'IMG00 12.JPG',
+    'IMG00 15.JPG',
+    'IMG00 18.JPG',
+    'IMG00 23.JPG',
+    'IMG00 24.JPG',
+    'IMG00 25.JPG',
+    'IMG00 29.JPG',
+    'IMG00 35.JPG',
+    'IMG00 37.JPG',
+    'IMG00 41.JPG',
+    'IMG00 46.JPG',
+    'IMG00 47.JPG',
+    'IMG00 7.JPG'
   ];
 
   const COURT_WEDDING_FILES = [
@@ -103,7 +182,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const groomsmenGrid = document.getElementById('groomsmenGrid');
 
     if (bridesmaidGrid) {
-      bridesmaidGrid.innerHTML = PARTY_DATA.bridesmaids
+      const displayBridesmaids = PARTY_DATA.bridesmaids.slice(0, 4);
+      const hasMoreBridesmaids = PARTY_DATA.bridesmaids.length > 4;
+
+      let bridesmaidHtml = displayBridesmaids
         .map((person, index) => {
           const src = encodeAsset('bridesmaid', person.file);
           return `
@@ -119,10 +201,25 @@ document.addEventListener('DOMContentLoaded', () => {
           `;
         })
         .join('');
+
+      if (hasMoreBridesmaids) {
+        bridesmaidHtml += `
+          <div class="view-more-wrapper reveal">
+            <button class="view-more-btn" data-gallery="bridesmaids" data-folder="bridesmaid" data-party-type="bridesmaids">
+              View More Bridesmaids (${PARTY_DATA.bridesmaids.length - 4} more)
+            </button>
+          </div>
+        `;
+      }
+
+      bridesmaidGrid.innerHTML = bridesmaidHtml;
     }
 
     if (groomsmenGrid) {
-      groomsmenGrid.innerHTML = PARTY_DATA.groomsmen
+      const displayGroomsmen = PARTY_DATA.groomsmen.slice(0, 4);
+      const hasMoreGroomsmen = PARTY_DATA.groomsmen.length > 4;
+
+      let groomsmenHtml = displayGroomsmen
         .map((person, index) => {
           const src = encodeAsset('groomsmen', person.file);
           return `
@@ -138,13 +235,28 @@ document.addEventListener('DOMContentLoaded', () => {
           `;
         })
         .join('');
+
+      if (hasMoreGroomsmen) {
+        groomsmenHtml += `
+          <div class="view-more-wrapper reveal">
+            <button class="view-more-btn" data-gallery="groomsmen" data-folder="groomsmen" data-party-type="groomsmen">
+              View More Groomsmen (${PARTY_DATA.groomsmen.length - 4} more)
+            </button>
+          </div>
+        `;
+      }
+
+      groomsmenGrid.innerHTML = groomsmenHtml;
     }
   };
 
   const renderMasonryGrid = (container, folder, files, groupName) => {
     if (!container) return;
 
-    container.innerHTML = files
+    const displayFiles = files.slice(0, 4);
+    const hasMore = files.length > 4;
+
+    let html = displayFiles
       .map((file, index) => {
         const src = encodeAsset(folder, file);
         const tall = index % 4 === 0 ? ' media-card--tall' : '';
@@ -156,6 +268,18 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
       })
       .join('');
+
+    if (hasMore) {
+      html += `
+        <div class="view-more-wrapper reveal">
+          <button class="view-more-btn" data-gallery="${groupName}" data-folder="${folder}">
+            View More Images (${files.length - 4} more)
+          </button>
+        </div>
+      `;
+    }
+
+    container.innerHTML = html;
   };
 
   const renderJourney = () => {
@@ -177,6 +301,110 @@ document.addEventListener('DOMContentLoaded', () => {
   renderJourney();
   renderProposal();
   renderCourtWedding();
+
+  /* ---------------------------------------------------------
+     GALLERY MODAL - View More Images
+  --------------------------------------------------------- */
+  // Create gallery modal if it doesn't exist
+  let galleryModal = document.getElementById('galleryModal');
+  if (!galleryModal) {
+    galleryModal = document.createElement('div');
+    galleryModal.id = 'galleryModal';
+    galleryModal.className = 'gallery-modal';
+    galleryModal.innerHTML = `
+      <div class="gallery-modal-backdrop" data-close-gallery></div>
+      <div class="gallery-modal-content">
+        <button class="gallery-modal-close" data-close-gallery aria-label="Close gallery">&times;</button>
+        <div class="gallery-modal-grid" id="galleryModalGrid"></div>
+      </div>
+    `;
+    document.body.appendChild(galleryModal);
+  }
+
+  // Map of file arrays for each gallery
+  const galleryFileMap = {
+    'journey': JOURNEY_FILES,
+    'proposal': PROPOSAL_FILES,
+    'court wedding': COURT_WEDDING_FILES,
+    'bridesmaids': PARTY_DATA.bridesmaids.map(p => p.file),
+    'groomsmen': PARTY_DATA.groomsmen.map(p => p.file)
+  };
+
+  const partyNameMap = {
+    'bridesmaids': PARTY_DATA.bridesmaids,
+    'groomsmen': PARTY_DATA.groomsmen
+  };
+
+  // Handle "View More Images" button clicks
+  document.addEventListener('click', (e) => {
+    const viewMoreBtn = e.target.closest('.view-more-btn');
+    if (!viewMoreBtn) return;
+
+    const gallery = viewMoreBtn.dataset.gallery;
+    const folder = viewMoreBtn.dataset.folder;
+    const partyType = viewMoreBtn.dataset.partyType;
+    const files = galleryFileMap[gallery];
+
+    if (files) {
+      const modalGrid = document.getElementById('galleryModalGrid');
+      
+      if (partyType && partyNameMap[partyType]) {
+        // Render party cards with names and roles
+        const partyMembers = partyNameMap[partyType];
+        modalGrid.innerHTML = partyMembers
+          .map((person) => {
+            const src = encodeAsset(folder, person.file);
+            return `
+              <article class="gallery-modal-party-card">
+                <div class="gallery-modal-party-frame">
+                  <img src="${src}" alt="${escapeHtml(person.name)}" loading="lazy" data-lightbox-group="party"/>
+                </div>
+                <div class="gallery-modal-party-info">
+                  <p class="gallery-modal-party-role">${escapeHtml(person.role)}</p>
+                  <p class="gallery-modal-party-name">${escapeHtml(person.name)}</p>
+                </div>
+              </article>
+            `;
+          })
+          .join('');
+      } else {
+        // Render regular gallery images
+        modalGrid.innerHTML = files
+          .map((file) => {
+            const src = encodeAsset(folder, file);
+            return `
+              <article class="gallery-modal-card">
+                <img src="${src}" alt="${escapeHtml(fileBaseName(file))}" loading="lazy" data-lightbox-group="${gallery}"/>
+              </article>
+            `;
+          })
+          .join('');
+      }
+
+      galleryModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+
+  // Close gallery modal
+  const closeGalleryModal = () => {
+    if (galleryModal) {
+      galleryModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  };
+
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('[data-close-gallery]')) {
+      closeGalleryModal();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeGalleryModal();
+    }
+  });
 
   /* ---------------------------------------------------------
      2. HERO STAGGERED REVEAL

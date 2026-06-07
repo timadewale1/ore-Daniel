@@ -59,6 +59,34 @@ a { text-decoration: none; color: inherit; }
 }
 #preloader.hidden { opacity: 0; visibility: hidden; }
 
+#preloaderBg {
+  position: absolute; inset: 0;
+  display: flex;
+  pointer-events: none;
+}
+
+.preloader-side {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.4;
+}
+
+.preloader-left {
+  display: none;
+}
+
+.preloader-right {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .preloader-left,
+  .preloader-right {
+    display: flex;
+  }
+}
+
 .pre-monogram {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 8vw, 5rem);
@@ -576,6 +604,154 @@ a { text-decoration: none; color: inherit; }
   font-family: var(--font-display);
   font-size: 0.7rem; letter-spacing: 0.2em;
   color: rgba(245,240,232,0.6);
+}
+
+/* ─── VIEW MORE IMAGES ─── */
+.view-more-wrapper {
+  grid-column: 1 / -1;
+  display: flex; justify-content: center;
+  padding: 40px 20px 0;
+}
+
+.view-more-btn {
+  background: var(--olive);
+  color: var(--cream);
+  border: 1px solid var(--olive-light);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 14px 36px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+}
+.view-more-btn:hover {
+  background: var(--olive-light);
+  transform: translateY(-2px);
+}
+
+/* ─── GALLERY MODAL ─── */
+.gallery-modal {
+  position: fixed; inset: 0;
+  background: rgba(26,30,14,0.96);
+  backdrop-filter: blur(6px);
+  z-index: 9998;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.4s, visibility 0.4s;
+  padding: 20px;
+}
+.gallery-modal.active { opacity: 1; visibility: visible; }
+
+.gallery-modal-backdrop {
+  position: absolute; inset: 0;
+  cursor: pointer;
+}
+
+.gallery-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  max-height: 90vh;
+  background: rgba(26,30,14,0.8);
+  border: 1px solid rgba(200,169,110,0.2);
+  border-radius: 4px;
+  overflow-y: auto;
+  padding: 40px;
+}
+
+.gallery-modal-close {
+  position: absolute; top: 20px; right: 20px;
+  background: none; border: 1px solid rgba(245,240,232,0.3);
+  color: var(--cream); cursor: pointer;
+  font-size: 2rem; width: 48px; height: 48px;
+  border-radius: 50%;
+  transition: background 0.2s, border-color 0.2s;
+  z-index: 100;
+}
+.gallery-modal-close:hover { background: rgba(245,240,232,0.15); }
+
+.gallery-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  padding-bottom: 20px;
+}
+
+.gallery-modal-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  aspect-ratio: 4/5;
+}
+
+.gallery-modal-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.gallery-modal-card img:hover {
+  transform: scale(1.05);
+}
+
+/* Party cards in modal */
+.gallery-modal-party-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgba(107,120,60,0.05);
+  transition: background 0.3s var(--ease-out);
+}
+
+.gallery-modal-party-card:hover {
+  background: rgba(107,120,60,0.15);
+}
+
+.gallery-modal-party-frame {
+  position: relative;
+  width: 100%;
+  padding-bottom: 120%;
+  overflow: hidden;
+}
+
+.gallery-modal-party-frame img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.gallery-modal-party-card:hover .gallery-modal-party-frame img {
+  transform: scale(1.05);
+}
+
+.gallery-modal-party-info {
+  padding: 16px;
+  text-align: center;
+}
+
+.gallery-modal-party-role {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--olive);
+  margin-bottom: 4px;
+}
+
+.gallery-modal-party-name {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--ink);
+  font-weight: 500;
 }
 
 /* ─── VIDEO ─── */
