@@ -1050,6 +1050,8 @@ a { text-decoration: none; color: inherit; }
   border-top: 1px solid rgba(200,169,110,0.2);
   padding: 64px 5vw 40px;
   text-align: center;
+  justify-items: center;
+  align-items: center;
 }
 .footer-monogram {
   font-family: var(--font-display);
@@ -1065,6 +1067,7 @@ a { text-decoration: none; color: inherit; }
   color: var(--olive-mist);
   letter-spacing: 0.12em;
   margin-bottom: 0.4rem;
+  text-align: center;
 }
 .footer-date {
   font-family: var(--font-display);
